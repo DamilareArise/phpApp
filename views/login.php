@@ -4,7 +4,7 @@
     
     <section style="min-height: 80dvh;">
         <div class="container col-md-4 p-3 shadow mt-5">
-            <form action="">
+            <form action="../controllers/login.php" method="post">
                 <p><?php echo $_GET['message']??'' ?></p>
                 <h4 class="text-center">Login</h4>
                 <input type="email" class="form-control mb-2" placeholder="Email" name="email">

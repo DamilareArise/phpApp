@@ -1,5 +1,7 @@
 <?php
     include '../models/user.php';
+    $x=true;
+
 
     $user = new User();
     
@@ -20,16 +22,16 @@
         }
 
 
-        if($user->signup($fullname, $email, $password) == true){
-            header("location: ../views/login.php?message=Signup successfull");
-            exit();
+        $result =  $user->signup($fullname, $email, $password);
+        $message = $result['message'];
+
+        if ($result['status']){
+            header("location: ../views/login.php?message=$message");
+        }else{
+            header("location: ../views/signup.php?message=$message");
         }
-        else{
-            header("location: ../views/signup.php?message=Failed to signup");
-        }
-        
         
     }
-
+// ALTER TABLE user_table CHANGE email email VARCHAR(255) UNIQUE;
 
 ?>

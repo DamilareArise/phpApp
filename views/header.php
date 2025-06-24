@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  $user = $_SESSION['user'] ?? null;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +28,13 @@
           <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-          <li class="nav-item"><a class="btn btn-primary ms-3" href="login.php">Login</a></li>
+          <li class="nav-item">
+            <?php if($user){ ?>
+             <a class="btn btn-primary ms-3" href="../controllers/logout.php">Logout</a>
+            <?php } else { ?>
+              <a class="btn btn-primary ms-3" href="login.php">Login</a>
+            <?php } ?>
+          </li>
         </ul>
       </div>
     </div>
