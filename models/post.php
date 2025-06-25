@@ -15,6 +15,18 @@
             $posts = $result->fetch_all(MYSQLI_ASSOC);
             return $posts;
         }
+
+        public function createCategory($name, $description, $user_id){
+
+        }
+
+        public function fetchCategory(){
+
+        }
+
+        public function addPost($title, $content, $image_path,  $category_id, $user_id){
+            
+        }
     }
 
 ?>
