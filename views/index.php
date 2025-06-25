@@ -1,4 +1,8 @@
-
+<?php 
+  include '../models/post.php';
+  $post = new PostConfig();
+  $all_posts = $post-> allPost();
+?>
 
 
 
@@ -13,7 +17,7 @@
     </div>
   </section>
 
-  <!-- Featured Post -->
+  <!-- Featured Post
   <section class="py-5">
     <div class="container">
       <h2 class="mb-4">Featured Post</h2>
@@ -26,13 +30,15 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Recent Posts -->
   <section class="py-5 bg-light">
     <div class="container">
-      <h3 class="mb-4">Recent Posts</h3>
+      <h3 class="mb-4">Posts</h3>
       <div class="row">
+        <?php if ($all_posts) {?>
+
         <div class="col-md-4 mb-4">
           <div class="card h-100">
             <div class="card-body">
@@ -42,24 +48,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title">CSS Grid Basics</h5>
-              <p class="card-text">Master layout with this modern CSS feature in under 10 minutes.</p>
-              <a href="#" class="btn btn-sm btn-primary">Read</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Deploying with cPanel</h5>
-              <p class="card-text">Step-by-step guide to deploying your PHP project using cPanel.</p>
-              <a href="#" class="btn btn-sm btn-primary">Read</a>
-            </div>
-          </div>
-        </div>
+
+        <?php } else { ?>
+
+          <p>No post available</p>
+
+        <?php } ?>
       </div>
     </div>
   </section>

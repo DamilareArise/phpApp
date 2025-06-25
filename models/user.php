@@ -57,4 +57,47 @@
             }
 
         }
+
+        public function change_password($old_password, $new_password, $id){
+            $query = "SELECT * FROM user_table WHERE id = '$id'";
+            $result = $this->db->query($query);
+            if($result->num_rows > 0){
+                $data = $result->fetch_assoc();
+                if(password_verify($old_password, $data['password'])){
+                    try{
+
+                        $hash_pw = password_hash($new_password, PASSWORD_DEFAULT);
+                        $query2 = "UPDATE user_table SET password = ? WHERE id = ?";
+                        $stmt = $this->db->prepare($query2);
+                        $stmt->bind_param('si', $hash_pw, $id);
+                        $stmt->execute();
+                        $stmt->close();
+                        return [
+                            'status' => true,
+                            'message' => "Password updated successfully"
+                        ];
+
+                    }
+                    catch (Exception $e) {
+                        return [
+                            'status' => false,
+                            'message' => $e->getMessage()
+                        ];
+                    }
+
+
+                }else{
+                    return [
+                        'status' => false,
+                        'message' => 'Old password is incorrect'
+                    ];
+                }
+   
+            }else{
+                return [
+                    'status' => false,
+                    'message' => 'User not found'
+                ];
+            }
+        }
     }
