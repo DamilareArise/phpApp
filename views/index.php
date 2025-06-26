@@ -1,7 +1,7 @@
 <?php 
   include '../models/post.php';
   $post = new PostConfig();
-  $all_posts = $post-> allPost();
+  $all_posts = $post->allPost();
 ?>
 
 

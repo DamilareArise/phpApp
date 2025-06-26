@@ -1,4 +1,5 @@
 <?php
+  session_abort();
   session_start();
   $user = $_SESSION['user'] ?? null;
 ?>
@@ -29,8 +30,8 @@
           <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-plus-circle text-primary"></i> Post </a></li>
           <?php if($user){ ?>
-            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-plus-circle text-primary"></i> Post </a></li>
             
             <div class="dropdown">
               <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,8 +39,12 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-plus-circle text-primary"></i> Category</a></li>
-                <li><a class="dropdown-item" href="../views/change_password.php">Change password</a></li>
+
+                <?php if($user['is_admin']) {?>
+                  <li><a class="dropdown-item" href="categoryForm.php"><i class="bi bi-plus-circle text-primary"></i> Category</a></li>
+                <?php } ?>
+
+                <li><a class="dropdown-item" href="change_password.php">Change password</a></li>
                 <li><a class="dropdown-item" href="../controllers/logout.php">Logout</a></li>
               </ul>
             </div>

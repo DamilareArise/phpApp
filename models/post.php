@@ -17,11 +17,31 @@
         }
 
         public function createCategory($name, $description, $user_id){
+            try{
 
+                $sql = "INSERT INTO category_table(`name`, `description`, created_by) VALUES(?, ?, ?)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bind_param('ssi', $name, $description, $user_id);
+                $stmt->execute();
+                $stmt->close();
+                return [
+                    "status"=>true,
+                    "message"=>"Category created successfully"
+                ];
+            }
+            catch(Exception $e){
+                return [
+                    "status"=>false,
+                    "message"=> $e->getMessage()
+                ];
+            }
         }
 
         public function fetchCategory(){
-
+            $sql = 'SELECT c.*, u.fullname FROM `category_table` as c LEFT JOIN user_table as u ON c.created_by = u.id';
+            $result = $this->db->query($sql);
+            $categories=$result->fetch_all(MYSQLI_ASSOC);
+            return $categories;
         }
 
         public function addPost($title, $content, $image_path,  $category_id, $user_id){
