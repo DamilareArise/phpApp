@@ -30,7 +30,8 @@
           <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Articles</a></li>
           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-plus-circle text-primary"></i> Post </a></li>
+          <li class="nav-item"><a class="nav-link" href="../views/postForm.php"><i class="bi bi-plus-circle text-primary"></i> Post </a></li>
+
           <?php if($user){ ?>
             
             <div class="dropdown">

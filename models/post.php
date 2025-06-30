@@ -45,7 +45,24 @@
         }
 
         public function addPost($title, $content, $image_path,  $category_id, $user_id){
-            
+            try{
+
+                $sql = "INSERT INTO blog_table(title, content, image_path, author, category) VALUES(?, ?, ?, ?, ?)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bind_param('sssii', $title, $content, $image_path, $user_id, $category_id);
+                $stmt->execute();
+                $stmt->close();
+                return [
+                    "status"=>true,
+                    "message"=>"Post added succesfully"
+                ];
+            }
+            catch(Exception $e){
+                return [
+                    "status"=>false,
+                    "message"=>$e->getMessage()
+                ];
+            }   
         }
     }
 
