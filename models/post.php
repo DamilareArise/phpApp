@@ -16,6 +16,20 @@
             return $posts;
         }
 
+        public function somePost(){
+            $sql = "SELECT * FROM blog_table ORDER BY created_at DESC LIMIT 6";
+            $result = $this->db->query($sql);
+            $posts = $result->fetch_all(MYSQLI_ASSOC);
+            return $posts;
+        }
+
+        public function postById($id){
+            $sql = "SELECT b.*, u.fullname, c.name as category_name FROM blog_table AS b LEFT JOIN user_table AS u ON u.id = b.author LEFT JOIN category_table AS c ON c.id = b.category WHERE b.id = '$id'";
+            $result = $this->db->query($sql);
+            $post = $result->fetch_assoc();
+            return $post;
+        }
+
         public function createCategory($name, $description, $user_id){
             try{
 

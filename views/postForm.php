@@ -1,4 +1,5 @@
 <?php
+    include '../controllers/user_guard.php';
     include '../models/post.php';
     $post = new PostConfig();
     $categories = $post->fetchCategory();
