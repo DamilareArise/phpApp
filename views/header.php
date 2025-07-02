@@ -43,6 +43,8 @@
 
                 <?php if($user['is_admin']) {?>
                   <li><a class="dropdown-item" href="categoryForm.php"><i class="bi bi-plus-circle text-primary"></i> Category</a></li>
+                  <li><a class="dropdown-item" href="handleUser.php">Handle User</a></li>
+                  <li><a class="dropdown-item" href="handlePost.php">Handle Post</a></li>
                 <?php } ?>
 
                 <li><a class="dropdown-item" href="change_password.php">Change password</a></li>

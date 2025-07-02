@@ -1,34 +1,23 @@
 <?php 
+
   include '../models/post.php';
   $post = new PostConfig();
-  $all_posts = $post->PostByLimit(3);
-  
+  $all_posts = $post->PostByLimit();
+
 ?>
 
 
-
-<?php include 'header.php' ?>
-
+<?php include 'header.php'; ?>
   <style>
     .card-img-top{
       max-height: 30vh;
       object-fit: cover;
     }
   </style>
-
-  <!-- Hero Section -->
-  <section class="py-5 text-center bg-light">
+<!-- Recent Posts -->
+  <section class="py-5 bg-light" style="min-height: 100dvh;">
     <div class="container">
-      <h1 class="display-4">Welcome to MyBlog</h1>
-      <p class="lead">Insights, tutorials, and thoughts on web development, tech, and life.</p>
-      <a href="#" class="btn btn-dark btn-lg mt-3">Read Latest Posts</a>
-    </div>
-  </section>
-
-  <!-- Recent Posts -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <h3 class="mb-4 text-center">Featured Posts</h3>
+      <h3 class="mb-4 text-center">All Posts</h3>
       <div class="row">
         <?php if ($all_posts) {?>
           <?php foreach ($all_posts as $index => $post) {?>
@@ -51,9 +40,8 @@
 
         <?php } ?>
       </div>
-      <p class="text-end"><a href="allpost.php" class="text-black">view more</a></p>
     </div>
 
   </section>
 
-  <?php include 'footer.php' ?>
+<?php include 'footer.php'; ?>

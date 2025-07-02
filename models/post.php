@@ -10,14 +10,19 @@
         }
 
         public function allPost(){
-            $sql = "SELECT * FROM blog_table";
+            $sql = "SELECT b.*, u.fullname, c.name as category_name FROM `blog_table` as b LEFT JOIN user_table as u ON u.id = b.author LEFT JOIN category_table as c ON c.id = b.category;";
             $result = $this->db->query($sql);
             $posts = $result->fetch_all(MYSQLI_ASSOC);
             return $posts;
         }
 
-        public function somePost(){
-            $sql = "SELECT * FROM blog_table ORDER BY created_at DESC LIMIT 6";
+        public function PostByLimit($limit=null){
+            if ($limit && $limit > 0){
+                $sql = "SELECT * FROM blog_table WHERE approved=1 ORDER BY created_at DESC LIMIT $limit";
+            }
+            else{
+                $sql = "SELECT * FROM blog_table WHERE approved=1 ORDER BY created_at DESC";
+            }
             $result = $this->db->query($sql);
             $posts = $result->fetch_all(MYSQLI_ASSOC);
             return $posts;
@@ -77,6 +82,23 @@
                     "message"=>$e->getMessage()
                 ];
             }   
+        }
+
+        public function handleStatus($id){
+            try{
+                $sql = "UPDATE blog_table set approved = CASE WHEN approved = 0 THEN 1 ELSE 0 END WHERE id = $id";
+                $this->db->query($sql);
+                return [
+                    "status"=>true,
+                    "message"=>"Post status updated successfully"
+                ];
+            }
+            catch(Exception $e){
+                return [
+                    "status"=>false,
+                    "message"=>$e->getMessage()
+                ];
+            }
         }
     }
 
