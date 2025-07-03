@@ -1,4 +1,5 @@
 <?php
+    include '../controllers/user_guard.php';
     include '../models/post.php';
 
     $post_id = $_GET['post_id'] ?? null;
