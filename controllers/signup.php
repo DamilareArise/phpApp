@@ -1,8 +1,10 @@
 <?php
     include '../models/user.php';
-    $x=true;
+    include '../models/sendmail.php';
+    
 
-
+    $email_template = file_get_contents('../mails/onboarding.html');
+    $mail = new MailConfig();
     $user = new User();
     
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -26,6 +28,9 @@
         $message = $result['message'];
 
         if ($result['status']){
+            $body = str_replace(["[User's First Name]"], [$fullname], $email_template);
+            $subject = 'Welcome to PHP Blog';
+            $mail->sendmail($subject, $body, $email);
             header("location: ../views/login.php?message=$message");
         }else{
             header("location: ../views/signup.php?message=$message");
