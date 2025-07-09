@@ -100,4 +100,58 @@
                 ];
             }
         }
+
+        public function getUserbyEmail($email){
+            $sql = "SELECT * FROM user_table WHERE email = '$email' ";
+            $result = $this->db->query($sql);
+            if($result->num_rows > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function updateToken($email, $token){
+            try{
+                $sql = "UPDATE user_table SET token = ? WHERE email = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bind_param('ss', $token, $email);
+                $stmt->execute();
+                $stmt->close();
+                
+                return true;
+            }
+            catch(Exception $e){
+                return false;
+            }
+        }
+
+        public function resetPassword($password, $token){
+            try{
+                $hash_pw = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "UPDATE user_table SET `password` = ? WHERE token = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bind_param('ss', $hash_pw, $token);
+                $stmt->execute();
+                if($stmt->affected_rows > 0){
+                    return [
+                        "status" => true,
+                        "message"=> "Reset password successfull"
+                    ];
+                }else{
+                    return [
+                        "status" => false,
+                        "message"=> "Error resetting password. Try again. $stmt->affected_rows"
+                    ];
+                }
+
+                
+            }
+            catch(Exception $e){
+                return [
+                        "status" => false,
+                        "message"=> $e
+                    ];
+            }
+        }
     }

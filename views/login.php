@@ -11,7 +11,7 @@
                 <input type="password" class="form-control mb-2" placeholder="Password" name="password">
                 <button class="btn btn-primary w-100">Login</button>
                 <div class="d-flex justify-content-between">
-                    <span>Forgot password?</span>
+                    <span><a href="forgot_password.php">Forgot password?</a></span>
                     <span>Don't have account? <a href="signup.php">Signup</a> </span>
                 </div>
             </form>
