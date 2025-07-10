@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="fetchPost()">
+    <h3>all Post</h3>
+    <div id="displayScreen">
+
+    </div>
+
+    <script>
+
+        async function fetchPost(){
+            let req = await fetch('http://localhost/phpApp/api/allpost.php')
+            let data = await req.json()
+            console.log(data)
+
+            data.forEach((post) => {
+                displayScreen.innerHTML += `<p>${post.title}</p>`;
+            });
+        }
+
+    </script>
+</body>
+</html>

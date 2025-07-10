@@ -3,6 +3,7 @@
   $post = new PostConfig();
   $all_posts = $post->PostByLimit(3);
   
+  
 ?>
 
 
